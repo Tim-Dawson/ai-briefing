@@ -100,8 +100,8 @@
     .archive-entry {
       display: flex;
       align-items: center;
-      gap: 16px;
-      padding: 16px 20px;
+      gap: 12px;
+      padding: 18px 20px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -113,20 +113,22 @@
       border-color: var(--accent);
       box-shadow: var(--shadow);
     }
-    .archive-entry time {
-      flex-shrink: 0;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--accent);
-      min-width: 120px;
+    .archive-entry-inner {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
     .archive-title {
-      flex: 1;
-      font-size: 0.95rem;
+      font-size: 1rem;
+      font-weight: 600;
       color: var(--text);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      line-height: 1.4;
+    }
+    .archive-entry time {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
     }
     .archive-arrow {
       flex-shrink: 0;
@@ -161,9 +163,8 @@
     @media (max-width: 600px) {
       main { padding: 24px 16px 48px; }
       .page-header h1 { font-size: 1.5rem; }
-      .archive-entry { padding: 14px 16px; flex-wrap: wrap; gap: 8px; }
-      .archive-entry time { min-width: auto; font-size: 0.8rem; }
-      .archive-title { font-size: 0.875rem; white-space: normal; }
+      .archive-entry { padding: 14px 16px; }
+      .archive-title { font-size: 0.9rem; }
       .site-header-inner { padding: 14px 16px; }
       .site-footer { padding: 20px 16px 32px; flex-direction: column; text-align: center; }
     }
@@ -182,11 +183,13 @@
   <main>
     <header class="page-header">
       <h1>Archive</h1>
-      <p>1 briefing</p>
+      <p>1 post</p>
     </header>
     <div class="archive-list"><a href="2026-06-02.html" class="archive-entry">
-            <time datetime="2026-06-02">June 2nd, 2026</time>
-            <span class="archive-title">June 2nd, 2026</span>
+            <div class="archive-entry-inner">
+              <span class="archive-title">June 2nd, 2026</span>
+              <time datetime="2026-06-02">June 2nd, 2026</time>
+            </div>
             <span class="archive-arrow">&rarr;</span>
           </a></div>
   </main>
