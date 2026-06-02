@@ -119,44 +119,8 @@
       <div class="meta">Generated locally by Jarvis</div>
     </header>
     <section class="card">
-  <h2>At a Glance</h2>
-  
-<ul><li>Physical AI had the loudest signal: NVIDIA&#x27;s Cosmos 3 release tries to merge perception, simulation, and action into one open world-model stack.</li><li>Agent infrastructure is moving beneath the model layer: Nemotron 3 Ultra, OpenShell, and AWS Bedrock/Codex point to governance, runtime, and deployment becoming the real battleground.</li><li>Open-weight models are leaning harder into agent use cases: MiniMax M3 combines long context, coding, multimodality, and explicit thinking controls.</li><li>Multimodal agents are becoming screen-and-terminal operators rather than chatbots with attached tools, as Qwen3.7-Plus shows.</li></ul>
-</section>
-<section class="card">
-  <h2>1. Cosmos 3: one model for seeing, simulating, and acting</h2>
-  <p>NVIDIA launched Cosmos 3 at GTC Taipei as an open world foundation model for physical AI. The interesting bit is not simply that it generates video or understands scenes; it is the attempt to put vision reasoning, world generation, and action prediction into a single mixture-of-transformers architecture. NVIDIA says the model family spans text, image, video, ambient audio, and action data, with immediate Super and Nano variants for high-accuracy simulation versus faster generation.</p>
-<p>Why it matters: robotics and autonomous systems keep running into the same expensive gap between simulation and the physical world. If a model can reason about a scene, synthesize realistic variations, and predict actions in one shared representation, it can become training infrastructure rather than just a perception component. That changes the workflow: developers can use the model to generate synthetic data, post-train policy models, and test edge cases before touching hardware.</p>
-<p>Source: <a href="https://www.globenewswire.com/news-release/2026/06/01/3303987/0/en/NVIDIA-Launches-Cosmos-3-the-Open-Frontier-Foundation-Model-for-Physical-AI.html">NVIDIA Cosmos 3 launch</a> and <a href="https://huggingface.co/blog/nvidia/cosmos-3-for-physical-ai">Hugging Face technical overview</a>.</p>
-</section>
-<section class="card">
-  <h2>2. Nemotron 3 Ultra and OpenShell: the agent stack grows a runtime layer</h2>
-  <p>NVIDIA also positioned Nemotron 3 Ultra as a 550B-parameter mixture-of-experts model for long-running agents across coding, research, and enterprise workflows. The model news is large, but the more teachable point is the surrounding stack: agent-development blueprints, CUDA-accelerated libraries, and OpenShell, a secure runtime intended to place controls underneath agents rather than relying only on prompts or orchestration rules.</p>
-<p>Why it matters: enterprise agents fail in boring, operational ways: unsafe tool access, unclear audit trails, brittle sandboxes, and cost per successful task. A runtime layer that constrains execution, observes actions, and supports governance may matter more than one more benchmark point. The pattern to watch is the separation of concerns: model for reasoning, harness for task flow, runtime for execution boundaries, and deployment fabric for economics.</p>
-<p>Source: <a href="https://investor.nvidia.com/news/press-release-details/2026/Enterprise-Software-Leaders-Build-AI-Agents-With-NVIDIA/default.aspx">NVIDIA enterprise agent announcement</a> and <a href="https://www.cio.com/article/4179537/nvidia-stacks-up-agentic-ai-infrastructure.html">CIO analysis of NVIDIA&#x27;s agent stack</a>.</p>
-</section>
-<section class="card">
-  <h2>3. MiniMax M3: open-weight models aim at long-context coding agents</h2>
-  <p>MiniMax released M3, describing it as an open-weight model combining frontier coding, native multimodality, and a 1M-token context window. It also exposes a practical distinction between thinking-enabled mode for complex reasoning and long-horizon collaboration, and faster non-thinking mode for latency-sensitive work such as chat and code completion.</p>
-<p>Why it matters: long-context coding is not just about pasting a large repo into a prompt. Agents need to hold plans, diffs, logs, screenshots, design notes, and tool results without losing the thread. M3&#x27;s pitch shows where open-weight competition is going: not merely smaller copies of frontier chat models, but models tuned for agent loops where context length, tool competence, and controllable reasoning latency all affect cost per completed task.</p>
-<p>Source: <a href="https://www.minimax.io/blog/minimax-m3">MiniMax M3 release post</a>.</p>
-</section>
-<section class="card">
-  <h2>4. Qwen3.7-Plus: multimodal agents move across GUI and CLI</h2>
-  <p>Alibaba&#x27;s Qwen team launched Qwen3.7-Plus as a multimodal agent foundation model that can work with images, video, screens, webpages, and text while moving between GUI, CLI, and tool environments. Reporting around the release emphasizes screen understanding, app navigation, visual grounding, and software or office workflows.</p>
-<p>Why it matters: this is the direction that makes agents feel less like API wrappers. Real work often crosses interfaces: read a webpage, inspect a screenshot, edit code, run a terminal command, and verify the result visually. Models that unify these modes reduce handoff friction between separate vision models, browser agents, coding agents, and tool callers. The hard problem shifts from &#x27;can it see?&#x27; to &#x27;can it execute a coherent loop safely across interfaces?&#x27;</p>
-<p>Source: <a href="https://www.ithome.com/0/958/449.htm">IT之家 report on Qwen3.7-Plus</a> and <a href="https://www.aastocks.com/en/usq/news/comment.aspx?catg=4&amp;id=NOW.1527039&amp;source=AAFN">AAStocks English summary</a>.</p>
-</section>
-<section class="card">
-  <h2>5. OpenAI Codex on AWS Bedrock: coding agents enter the enterprise procurement lane</h2>
-  <p>OpenAI announced that frontier models and Codex are generally available on Amazon Bedrock. The important detail is packaging: Codex is being placed into an AWS-native environment with enterprise controls, billing, and infrastructure patterns that many teams already use.</p>
-<p>Why it matters: coding agents are now moving from individual developer tools into governed platform services. That matters for adoption because large companies care about identity, auditability, data boundaries, procurement, and deployment controls as much as raw coding ability. It also means agentic software engineering will increasingly be evaluated inside existing cloud governance models, not just on local demos or leaderboard tasks.</p>
-<p>Source: <a href="https://openai.com/index/openai-frontier-models-and-codex-are-now-available-on-aws/">OpenAI announcement</a>.</p>
-</section>
-<section class="card">
-  <h2>One Thing to Dig Into</h2>
-  <p>Read the Cosmos 3 technical overview first. It is the most interesting thread today because it connects several themes at once: open models, world modeling, synthetic data, action generation, and the move from chat-centric AI toward systems that can train, simulate, and operate in the physical world. If the last wave was about models that can answer, this one is about models that can rehearse.</p>
-<p>Start here: <a href="https://huggingface.co/blog/nvidia/cosmos-3-for-physical-ai">Welcome NVIDIA Cosmos 3: The First Open Omni-model for Physical AI Reasoning and Action</a>.</p>
+  <h2>Deploy Test</h2>
+  <p>Verifying deployment works.</p>
 </section>
     <footer>Source links are embedded in the relevant sections.</footer>
   </main>
