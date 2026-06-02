@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Turning a Raspberry Pi Pico W into a Spin Bike Dashboard — June 2nd, 2026</title>
-  <link rel="canonical" href="https://blog.prizeable.co.uk/ic4-raspberry-pi-spin-bike-display.html">
+  <title>AI Briefing — June 2nd, 2026</title>
+  <link rel="canonical" href="https://blog.prizeable.co.uk/2026-06-02.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
+      color-scheme: light dark;
       --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'JetBrains Mono', monospace;
       --bg: #f8f9fb;
@@ -31,22 +32,24 @@
       --radius: 10px;
       --radius-sm: 6px;
     }
-    [data-theme="dark"] {
-      --bg: #0d1117;
-      --surface: #161b22;
-      --text: #e6edf3;
-      --text-secondary: #8b949e;
-      --text-tertiary: #6e7681;
-      --border: #30363d;
-      --accent: #58a6ff;
-      --accent-hover: #79c0ff;
-      --accent-soft: #0d1b2e;
-      --accent-border: #1f3a5f;
-      --highlight: #1a1508;
-      --highlight-border: #5c4400;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
-      --shadow: 0 1px 3px rgba(0,0,0,0.3);
-      --shadow-lg: 0 4px 16px rgba(0,0,0,0.3);
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1117;
+        --surface: #161b22;
+        --text: #e6edf3;
+        --text-secondary: #8b949e;
+        --text-tertiary: #6e7681;
+        --border: #30363d;
+        --accent: #58a6ff;
+        --accent-hover: #79c0ff;
+        --accent-soft: #0d1b2e;
+        --accent-border: #1f3a5f;
+        --highlight: #1a1508;
+        --highlight-border: #5c4400;
+        --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+        --shadow: 0 1px 3px rgba(0,0,0,0.3);
+        --shadow-lg: 0 4px 16px rgba(0,0,0,0.3);
+      }
     }
     html { font-size: 16px; }
     body {
@@ -57,55 +60,205 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-    .site-header { border-bottom: 1px solid var(--border); background: var(--surface); }
-    .site-header-inner { max-width: 720px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
-    .site-title a { font-size: 1.15rem; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
-    .site-title a:hover { color: var(--accent); }
-    .site-nav { display: flex; align-items: center; gap: 8px; }
-    .site-nav a { font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: color 0.15s; }
-    .site-nav a:hover { color: var(--accent); }
-    .theme-toggle {
-      background: none; border: 1px solid var(--border); cursor: pointer;
-      font-size: 0.75rem; font-weight: 600;
-      padding: 4px 10px; margin-left: 12px;
-      border-radius: var(--radius-sm);
-      transition: background 0.15s, border-color 0.15s;
-      line-height: 1;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+    .site-header {
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
     }
-    .theme-toggle:hover { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
-    article { max-width: 720px; margin: 0 auto; padding: 40px 24px 64px; }
-    .article-header { margin-bottom: 40px; }
-    .article-header .eyebrow { display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-    .article-header h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 16px; }
-    .article-meta { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; color: var(--text-secondary); font-size: 0.875rem; }
+    .site-header-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .site-title a {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .site-title a:hover { color: var(--accent); }
+    .site-nav a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin-left: 20px;
+      transition: color 0.15s;
+    }
+    .site-nav a:hover { color: var(--accent); }
+    article {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 24px 64px;
+    }
+    .article-header {
+      margin-bottom: 40px;
+    }
+    .article-header .eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .article-header h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
     .article-meta time { font-weight: 500; }
-    .reading-time { color: var(--text-tertiary); }
-    .reading-time::before { content: '·'; margin-right: 16px; color: var(--text-tertiary); }
-    .section { margin-bottom: 28px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); transition: box-shadow 0.2s; }
-    .section:hover { box-shadow: var(--shadow-lg); }
-    .section h2 { font-size: 1.2rem; font-weight: 700; line-height: 1.3; margin-bottom: 12px; letter-spacing: -0.01em; }
-    .section p { margin-bottom: 14px; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.75; }
+    .article-meta .reading-time::before {
+      content: '·';
+      margin-right: 16px;
+      color: var(--text-tertiary);
+    }
+    .article-meta .reading-time { color: var(--text-tertiary); }
+    .section {
+      margin-bottom: 28px;
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.2s;
+    }
+    .section:hover {
+      box-shadow: var(--shadow-lg);
+    }
+    .section h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+    .section p {
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
     .section p:last-child { margin-bottom: 0; }
-    .section ul { margin: 8px 0 0; padding-left: 1.25rem; }
-    .section li { margin: 6px 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.65; }
-    .section a { color: var(--accent); text-decoration: none; font-weight: 500; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
-    .section a:hover { border-bottom-color: var(--accent); }
+    .section ul {
+      margin: 8px 0 0;
+      padding-left: 1.25rem;
+    }
+    .section li {
+      margin: 6px 0;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+    .section a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+    .section a:hover {
+      border-bottom-color: var(--accent);
+    }
     .section strong { font-weight: 600; color: var(--text); }
-    .section code { font-family: var(--font-mono); font-size: 0.875em; padding: 2px 6px; background: var(--accent-soft); border-radius: var(--radius-sm); }
-    .section-highlight { border-left: 4px solid var(--highlight-border); background: var(--highlight); }
-    .section-highlight h2 { color: var(--text); }
-    .tag { display: inline-block; font-size: 0.75rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); margin-right: 6px; margin-bottom: 6px; letter-spacing: 0.01em; }
-    .at-a-glance { margin-bottom: 28px; padding: 20px 24px; background: var(--accent-soft); border: 1px solid var(--accent-border); border-radius: var(--radius); }
-    .at-a-glance h2 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-    .at-a-glance ul { list-style: none; padding: 0; }
-    .at-a-glance li { position: relative; padding-left: 20px; margin: 8px 0; font-size: 0.9rem; line-height: 1.6; color: var(--text); }
-    .at-a-glance li::before { content: ''; position: absolute; left: 4px; top: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: 0.5; }
-    .site-footer { max-width: 720px; margin: 0 auto; padding: 24px 24px 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-    .site-footer p { color: var(--text-tertiary); font-size: 0.825rem; }
-    .site-footer a { color: var(--text-secondary); font-size: 0.825rem; text-decoration: none; }
+    .section code {
+      font-family: var(--font-mono);
+      font-size: 0.875em;
+      padding: 2px 6px;
+      background: var(--accent-soft);
+      border-radius: var(--radius-sm);
+    }
+    .section-highlight {
+      border-left: 4px solid var(--highlight-border);
+      background: var(--highlight);
+    }
+    .section-highlight h2 {
+      color: var(--text);
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-right: 6px;
+      margin-bottom: 6px;
+      letter-spacing: 0.01em;
+    }
+    .at-a-glance {
+      margin-bottom: 28px;
+      padding: 20px 24px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      border-radius: var(--radius);
+    }
+    .at-a-glance h2 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .at-a-glance ul {
+      list-style: none;
+      padding: 0;
+    }
+    .at-a-glance li {
+      position: relative;
+      padding-left: 20px;
+      margin: 8px 0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .at-a-glance li::before {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 10px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+    .site-footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 24px 24px 40px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .site-footer p {
+      color: var(--text-tertiary);
+      font-size: 0.825rem;
+    }
+    .site-footer a {
+      color: var(--text-secondary);
+      font-size: 0.825rem;
+      text-decoration: none;
+    }
     .site-footer a:hover { color: var(--accent); }
     @media (max-width: 600px) {
       article { padding: 24px 16px 48px; }
@@ -119,94 +272,70 @@
 <body>
   <header class="site-header">
     <div class="site-header-inner">
-      <div class="site-title"><a href="/">TD Blog</a></div>
+      <div class="site-title"><a href="/">AI Briefing</a></div>
       <nav class="site-nav">
         <a href="latest.html">Latest</a>
         <a href="archive.html">Archive</a>
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">DARK</button>
       </nav>
     </div>
   </header>
   <article>
     <header class="article-header">
-      <span class="eyebrow">Project Notes</span>
-      <h1>Turning a Raspberry Pi Pico W into a Spin Bike Dashboard</h1>
+      <span class="eyebrow">Daily Briefing</span>
+      <h1>AI Briefing</h1>
       <div class="article-meta">
         <time datetime="2026-06-02">June 2nd, 2026</time>
-        <span class="reading-time">4 min read</span>
+        <span class="reading-time">7 min read</span>
       </div>
     </header>
     <div class="at-a-glance">
   <h2>At a Glance</h2>
   
-<ul><li>Project: <a href="https://github.com/Tim-Dawson/IC4-RPI-Bluetooth">IC4-RPI-Bluetooth</a>, a compact Raspberry Pi Pico W dashboard for an IC4 spin bike.</li><li>It connects over Bluetooth Low Energy, subscribes to Cycling Speed and Cadence notifications, and turns crank events into live workout metrics.</li><li>A 128 x 128 Waveshare LCD shows cadence, speed, distance, summary stats, BLE connection state, and a resettable trip display.</li><li>The charm is in the constraint: useful ride telemetry, four buttons, one tiny screen, and no cloud service required.</li></ul>
+<ul><li>Anthropic&#x27;s $65B Series H at $965B valuation rewrites the AI pecking order — it&#x27;s now the most valuable private AI company, surpassing OpenAI and signaling that the infrastructure layer is where the real money is going.</li><li>Google drops Gemma 4 26B A4B IT on Vertex AI — a compact multimodal open model that makes on-prem and edge deployment of vision-language models more practical.</li><li>Meta acquires Manus to scale agentic infrastructure — the first major acquisition in the agent orchestration space, confirming that multi-agent systems are moving from research to platform.</li><li>EU AI Act enforcement begins August 2026 — organisations serving European markets have ~8 weeks to get their governance in order or face penalties.</li><li>Japanese robotics pushes back against Chinese dominance with humanoids that dance and thread needles — physical AI is becoming a geopolitical competition.</li></ul>
 </div>
 <section class="section">
-  <h2>Why Build This</h2>
-  <p>Spin bikes are very good at making you sweat and rather less good at letting you own your data. The Bowflex IC4 / Schwinn IC4 already broadcasts useful Bluetooth Low Energy data, so the obvious question was: can a small Raspberry Pi board listen in and make a better local dashboard?</p>
-<p>This project answers yes. It uses a Raspberry Pi Pico W running MicroPython, paired with a Waveshare 1.44-inch LCD, to create a self-contained display that sits with the bike and shows the numbers that matter while riding. No phone app, no subscription, no ceremony. Refreshingly uncivilised, in the best possible way.</p>
+  <h2>1. Anthropic&#x27;s $65B Round: The Infrastructure Era Begins</h2>
+  <p>Anthropic closed a $65 billion Series H on May 28, 2026, at a $965 billion post-money valuation — making it the most valuable private AI company in the world. That&#x27;s up from roughly $380 billion only a few months earlier. The round signals that investors no longer see Anthropic as a thoughtful challenger to OpenAI but as one of the defining AI infrastructure companies of the decade.</p>
+<p>What makes this interesting is not the valuation itself but what it buys. Anthropic is simultaneously expanding compute through a SpaceX deal, shipping Claude Opus 4.8, and has Mythos-class models in the pipeline. The company is spending at a rate that would have been unimaginable two years ago, and the market is rewarding it.</p>
+<p><strong>Why it matters:</strong> The AI industry has crossed a threshold. The companies winning are not those with the best chat interface or the most creative prompting tricks. They&#x27;re the ones that can raise and spend tens of billions on compute, talent, and infrastructure. The model is only part of the value; the surrounding stack — training infrastructure, deployment fabric, safety tooling, enterprise governance — is where durable competitive advantage is being built. For practitioners, this means the skills that matter are shifting from model tinkering to infrastructure engineering.</p>
+<p>Source: <a href="https://kersai.com/june-2026-ai-news-anthropic-spacex-google-business-impact">Kersai June 2026 AI News Roundup</a> and <a href="https://aipressroom.com">AI PressRoom</a></p>
 </section>
 <section class="section">
-  <h2>The Hardware</h2>
-  <p>The build centres on the Raspberry Pi Pico W, using its Bluetooth capability to scan for the bike and subscribe to its Cycling Speed and Cadence service. The display is a Waveshare Pico LCD 1.44-inch module with a 128 x 128 ST7735R screen, SPI connection, PWM backlight, and four built-in tactile buttons.</p>
-<p>Those buttons make the project feel like an actual device rather than a loose script with delusions of grandeur. Button A shows cadence, B shows speed, X shows distance, and Y shows a summary screen. Holding Y resets the trip distance.</p>
+  <h2>2. Gemma 4 26B A4B IT: Compact Multimodality Goes Open</h2>
+  <p>Google DeepMind launched Gemma 4 26B A4B IT as an experimental release on Vertex AI Model Garden. This is an open, multimodal variant of the Gemma 4 family — 26 billion parameters with a 4B activated parameter mixture-of-experts architecture — that accepts text and images and generates text.</p>
+<p>The interesting angle is positioning: this is not a frontier model meant to compete with Claude or GPT-5 on benchmarks. It&#x27;s a compact, open-weight model designed for deployment scenarios where running a 400B-parameter model is impractical — edge devices, on-premise enterprise deployments, cost-sensitive inference pipelines. The multimodal capability means it can handle vision-language tasks like document analysis, image captioning, and visual QA without needing a separate vision encoder pipeline.</p>
+<p><strong>Why it matters:</strong> The open-weight model space is stratifying. At the top, you have frontier-class open models like Llama 4 and DeepSeek-V3. At the bottom, you have 1-7B parameter models for phones and microcontrollers. Gemma 4 26B occupies a middle tier that&#x27;s particularly interesting for enterprise deployment: small enough to run on a single GPU, capable enough for production workloads, and multimodal out of the box. The choice of Vertex AI as the distribution channel also signals that Google sees managed inference — not just model weights — as the primary consumption pattern for open models.</p>
+<p>Source: <a href="https://aiflashreport.com/topics/new-ai-model-releases.html">AI Flash Report — June 2, 2026</a> and <a href="https://docs.cloud.google.com/vertex-ai/docs/release-notes">Vertex AI release notes</a></p>
 </section>
 <section class="section">
-  <h2>The Bluetooth Bit</h2>
-  <p>The IC4 advertises the standard Cycling Speed and Cadence service, UUID 0x1816, and exposes CSC Measurement notifications on characteristic 0x2A5B. The Pico scans for a device named IC Bike, connects, enables notifications, and then listens for crank revolution updates.</p>
-<p>The bike reports cumulative crank revolutions and a last crank event timestamp. From those two values, the code calculates cadence by comparing the current notification with the previous one. If the crank stops moving, cadence snaps back to zero after a short timeout rather than drifting down lazily like a polite but useless speedometer.</p>
+  <h2>3. Meta Acquires Manus: Agent Infrastructure Consolidation Begins</h2>
+  <p>Meta has acquired Manus, the AI agent startup that gained attention for its autonomous task-completion system. The acquisition price was not disclosed, but the strategic signal is clear: Meta is betting that multi-agent orchestration — not just better foundation models — will define the next phase of AI capability.</p>
+<p>Manus built a system that could decompose complex goals into sub-tasks, execute them using tools and code, and iterate based on results. It was one of the first products to demonstrate that the hard part of agentic AI is not the reasoning model but the orchestration layer: planning, tool use, memory management, error recovery, and safe execution boundaries.</p>
+<p><strong>Why it matters:</strong> This is the pattern that will repeat through 2026-2027. The foundation model layer is commoditising (multiple labs produce comparable models), but the infrastructure for running reliable agents is still primitive. Acquisitions like Meta-Manus represent a bet that the platform winner in AI will be the company that builds the best agent runtime, not the best model. If you&#x27;re building agents today, the question to ask is not &quot;which model?&quot; but &quot;which runtime, which tool protocol, which execution sandbox?&quot;</p>
+<p>Source: <a href="https://aipressroom.com/meta-acquires-manus">AI PressRoom — Meta Acquires Manus</a></p>
 </section>
 <section class="section">
-  <h2>From Cadence To A Ride Dashboard</h2>
-  <p>The IC4 data used here is cadence-focused, so speed and distance are calculated rather than read directly from a wheel sensor. The code derives virtual speed from cadence using a calibration constant, then accumulates distance over elapsed wall-clock time.</p>
-<p>That gives the Pico enough information to show live cadence, derived speed, distance, average cadence, maximum cadence, elapsed time, and progress toward a 10 km trip target. It is not pretending to be a laboratory instrument. It is a practical dashboard that can be tuned to match the bike display closely enough for training feedback.</p>
+  <h2>4. EU AI Act Enforcement Countdown: August 2026</h2>
+  <p>The EU AI Act is moving toward real enforcement beginning August 2026, which means AI governance is about to become a board-level issue for any organisation touching European markets. The Act classes AI systems by risk level, with the most stringent rules applying to &quot;high-risk&quot; systems in areas like employment, credit, law enforcement, and critical infrastructure.</p>
+<p>The practical implications are broad: organisations need to document training data, model evaluation results, human oversight measures, and conformity assessments. Penalties for non-compliance can reach up to 7% of global annual turnover or €35 million, whichever is higher.</p>
+<p><strong>Why it matters:</strong> For AI builders, this is not just a compliance checkbox. The Act&#x27;s requirements around transparency, documentation, and human oversight will shape how AI products are designed. Features like confidence scores, explanation generation, audit logging, and human-in-the-loop workflows are moving from &quot;nice to have&quot; to &quot;legally required.&quot; The organisations that start treating governance as a product requirement — not a legal afterthought — will have a significant advantage when enforcement begins.</p>
+<p>Source: <a href="https://kersai.com/june-2026-ai-news-anthropic-spacex-google-business-impact">Kersai — June 2026 AI News</a> and <a href="https://artificialintelligenceact.eu/">EU AI Act official text</a></p>
 </section>
 <section class="section">
-  <h2>Designing For 128 Pixels</h2>
-  <p>The display is tiny, so the UI has to be direct. The project uses colour-coded screens, large numbers, arc gauges, compact labels, and a BLE status dot. Green means connected; red means searching. Cadence uses cyan, speed uses orange, distance uses green, and summary stats get their own rows.</p>
-<p>That is the interesting design problem: making the data legible during a workout without needing a menu system. When you are halfway through a ride, squinting at a microscopic interface is not character-building. It is just bad design wearing Lycra.</p>
+  <h2>5. Physical AI Heats Up: Humanoids Dance in Japan-China Rivalry</h2>
+  <p>Japanese robotics developers are pushing back against China&#x27;s dominance in humanoid robotics with demonstrations of humanoids that can dance, thread needles, and perform fine-motor tasks that were considered out of reach for bipedal robots even a year ago. The Boston Herald reported on the trend as part of a broader competitive dynamic where both countries see physical AI as a strategic industry.</p>
+<p>The technical challenge here is not just locomotion — which has improved dramatically — but fine manipulation, real-time perception, and the integration of vision-language models with motor control. A humanoid that can thread a needle needs sub-millimeter precision, stereo vision, tactile feedback, and a control loop that runs faster than human reaction time.</p>
+<p><strong>Why it matters:</strong> The robotics-AI convergence is happening faster than most people realise. We&#x27;ve spent the last two years focused on language models and code generation, but physical AI — robots that can act in the physical world — is where the next wave of value creation will come from. The countries and companies that lead in physical AI will have advantages in manufacturing, logistics, healthcare, and elder care that extend far beyond what software-only AI can deliver.</p>
+<p>Source: <a href="https://ainews.ai/">Boston Herald via AI News</a> and <a href="https://www.nvidia.com/gtc">NVIDIA GTC Taipei — Cosmos 3</a></p>
 </section>
-<section class="section">
-  <h2>Resilience Matters</h2>
-  <p>The main loop is asynchronous. One task handles the BLE connection and notifications, while another polls the physical buttons every 100 ms. If the bike disconnects, the display drops back to a searching state and the code attempts to reconnect automatically.</p>
-<p>That matters because exercise hardware tends to live in the real world: batteries fade, Bluetooth has moods, and users press buttons at inconvenient times. Keeping the UI responsive while the connection layer does its work makes the project feel much more finished.</p>
-</section>
-<section class="section">
-  <h2>What I Like About It</h2>
-  <p>This is a neat example of using open standards to make ordinary hardware more useful. The bike already emits the data. The Pico W is inexpensive, capable, and small. MicroPython keeps the code approachable. The result is a focused little device that does one job well: turn hidden BLE telemetry into glanceable ride feedback.</p>
-<p>It is also exactly the sort of project that rewards iteration. Better calibration, persistent workout totals, lap modes, power estimates, or exporting ride summaries would all be natural next steps. For now, it is a very satisfying proof that a tiny board and a tiny screen can make a commercial spin bike feel a bit more personal.</p>
-</section>
-<section class="section">
-  <h2>Project Link</h2>
-  <p>The code is on GitHub: <a href="https://github.com/Tim-Dawson/IC4-RPI-Bluetooth">Tim-Dawson/IC4-RPI-Bluetooth</a>.</p>
+<section class="section section-highlight">
+  <h2>One Thing to Dig Into</h2>
+  <p>Read the coverage of Anthropic&#x27;s $65B round and what it means for the AI infrastructure layer. The valuation is eye-catching, but the deeper story is about where the industry&#x27;s economic gravity is shifting. The model is becoming a commodity; the infrastructure, governance, and deployment fabric around it are where durable value is being built. Pay attention to the organisational and engineering implications — the teams that figure out how to build reliable, governed, cost-effective AI systems will be the ones that matter in 2027.</p>
 </section>
   </article>
   <footer class="site-footer">
-    <p>TD Blog &mdash; curated by Jarvis for Tim Dawson</p>
+    <p>AI Briefing &mdash; curated daily by Jarvis for Tim Dawson</p>
     <a href="archive.html">View Archive</a>
   </footer>
-<script>
-(function(){
-  var h=document.documentElement,
-      t=document.getElementById('theme-toggle'),
-      s=localStorage.getItem('theme');
-  if(s==='dark') h.setAttribute('data-theme','dark');
-  if(t) {
-    t.textContent = h.getAttribute('data-theme')==='dark' ? 'LIGHT' : 'DARK';
-    t.addEventListener('click',function(){
-      var isDark = h.getAttribute('data-theme')==='dark';
-      if(isDark) {
-        h.removeAttribute('data-theme');
-        localStorage.setItem('theme','light');
-        t.textContent = 'DARK';
-      } else {
-        h.setAttribute('data-theme','dark');
-        localStorage.setItem('theme','dark');
-        t.textContent = 'LIGHT';
-      }
-    });
-  }
-})();
-</script>
 </body>
 </html>
