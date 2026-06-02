@@ -275,7 +275,7 @@
       <div class="site-title"><a href="/">AI Briefing</a></div>
       <nav class="site-nav">
         <a href="latest.html">Latest</a>
-        <a href="https://github.com/Tim-Dawson/ai-briefing">Archive</a>
+        <a href="archive.html">Archive</a>
       </nav>
     </div>
   </header>
@@ -285,57 +285,17 @@
       <h1>June 2nd, 2026</h1>
       <div class="article-meta">
         <time datetime="2026-06-02">June 2nd, 2026</time>
-        <span class="reading-time">7 min read</span>
+        <span class="reading-time">1 min read</span>
       </div>
     </header>
-    <div class="at-a-glance">
-  <h2>At a Glance</h2>
-  
-<ul><li>Anthropic&#x27;s $65B Series H at $965B valuation rewrites the AI pecking order — it&#x27;s now the most valuable private AI company, surpassing OpenAI and signaling that the infrastructure layer is where the real money is going.</li><li>Google drops Gemma 4 26B A4B IT on Vertex AI — a compact multimodal open model that makes on-prem and edge deployment of vision-language models more practical.</li><li>Meta acquires Manus to scale agentic infrastructure — the first major acquisition in the agent orchestration space, confirming that multi-agent systems are moving from research to platform.</li><li>EU AI Act enforcement begins August 2026 — organisations serving European markets have ~8 weeks to get their governance in order or face penalties.</li><li>Japanese robotics pushes back against Chinese dominance with humanoids that dance and thread needles — physical AI is becoming a geopolitical competition.</li></ul>
-</div>
-<section class="section">
-  <h2>1. Anthropic&#x27;s $65B Round: The Infrastructure Era Begins</h2>
-  <p>Anthropic closed a $65 billion Series H on May 28, 2026, at a $965 billion post-money valuation — making it the most valuable private AI company in the world. That&#x27;s up from roughly $380 billion only a few months earlier. The round signals that investors no longer see Anthropic as a thoughtful challenger to OpenAI but as one of the defining AI infrastructure companies of the decade.</p>
-<p>What makes this interesting is not the valuation itself but what it buys. Anthropic is simultaneously expanding compute through a SpaceX deal, shipping Claude Opus 4.8, and has Mythos-class models in the pipeline. The company is spending at a rate that would have been unimaginable two years ago, and the market is rewarding it.</p>
-<p><strong>Why it matters:</strong> The AI industry has crossed a threshold. The companies winning are not those with the best chat interface or the most creative prompting tricks. They&#x27;re the ones that can raise and spend tens of billions on compute, talent, and infrastructure. The model is only part of the value; the surrounding stack — training infrastructure, deployment fabric, safety tooling, enterprise governance — is where durable competitive advantage is being built. For practitioners, this means the skills that matter are shifting from model tinkering to infrastructure engineering.</p>
-<p>Source: <a href="https://kersai.com/june-2026-ai-news-anthropic-spacex-google-business-impact">Kersai June 2026 AI News Roundup</a> and <a href="https://aipressroom.com">AI PressRoom</a></p>
-</section>
-<section class="section">
-  <h2>2. Gemma 4 26B A4B IT: Compact Multimodality Goes Open</h2>
-  <p>Google DeepMind launched Gemma 4 26B A4B IT as an experimental release on Vertex AI Model Garden. This is an open, multimodal variant of the Gemma 4 family — 26 billion parameters with a 4B activated parameter mixture-of-experts architecture — that accepts text and images and generates text.</p>
-<p>The interesting angle is positioning: this is not a frontier model meant to compete with Claude or GPT-5 on benchmarks. It&#x27;s a compact, open-weight model designed for deployment scenarios where running a 400B-parameter model is impractical — edge devices, on-premise enterprise deployments, cost-sensitive inference pipelines. The multimodal capability means it can handle vision-language tasks like document analysis, image captioning, and visual QA without needing a separate vision encoder pipeline.</p>
-<p><strong>Why it matters:</strong> The open-weight model space is stratifying. At the top, you have frontier-class open models like Llama 4 and DeepSeek-V3. At the bottom, you have 1-7B parameter models for phones and microcontrollers. Gemma 4 26B occupies a middle tier that&#x27;s particularly interesting for enterprise deployment: small enough to run on a single GPU, capable enough for production workloads, and multimodal out of the box. The choice of Vertex AI as the distribution channel also signals that Google sees managed inference — not just model weights — as the primary consumption pattern for open models.</p>
-<p>Source: <a href="https://aiflashreport.com/topics/new-ai-model-releases.html">AI Flash Report — June 2, 2026</a> and <a href="https://docs.cloud.google.com/vertex-ai/docs/release-notes">Vertex AI release notes</a></p>
-</section>
-<section class="section">
-  <h2>3. Meta Acquires Manus: Agent Infrastructure Consolidation Begins</h2>
-  <p>Meta has acquired Manus, the AI agent startup that gained attention for its autonomous task-completion system. The acquisition price was not disclosed, but the strategic signal is clear: Meta is betting that multi-agent orchestration — not just better foundation models — will define the next phase of AI capability.</p>
-<p>Manus built a system that could decompose complex goals into sub-tasks, execute them using tools and code, and iterate based on results. It was one of the first products to demonstrate that the hard part of agentic AI is not the reasoning model but the orchestration layer: planning, tool use, memory management, error recovery, and safe execution boundaries.</p>
-<p><strong>Why it matters:</strong> This is the pattern that will repeat through 2026-2027. The foundation model layer is commoditising (multiple labs produce comparable models), but the infrastructure for running reliable agents is still primitive. Acquisitions like Meta-Manus represent a bet that the platform winner in AI will be the company that builds the best agent runtime, not the best model. If you&#x27;re building agents today, the question to ask is not &quot;which model?&quot; but &quot;which runtime, which tool protocol, which execution sandbox?&quot;</p>
-<p>Source: <a href="https://aipressroom.com/meta-acquires-manus">AI PressRoom — Meta Acquires Manus</a></p>
-</section>
-<section class="section">
-  <h2>4. EU AI Act Enforcement Countdown: August 2026</h2>
-  <p>The EU AI Act is moving toward real enforcement beginning August 2026, which means AI governance is about to become a board-level issue for any organisation touching European markets. The Act classes AI systems by risk level, with the most stringent rules applying to &quot;high-risk&quot; systems in areas like employment, credit, law enforcement, and critical infrastructure.</p>
-<p>The practical implications are broad: organisations need to document training data, model evaluation results, human oversight measures, and conformity assessments. Penalties for non-compliance can reach up to 7% of global annual turnover or €35 million, whichever is higher.</p>
-<p><strong>Why it matters:</strong> For AI builders, this is not just a compliance checkbox. The Act&#x27;s requirements around transparency, documentation, and human oversight will shape how AI products are designed. Features like confidence scores, explanation generation, audit logging, and human-in-the-loop workflows are moving from &quot;nice to have&quot; to &quot;legally required.&quot; The organisations that start treating governance as a product requirement — not a legal afterthought — will have a significant advantage when enforcement begins.</p>
-<p>Source: <a href="https://kersai.com/june-2026-ai-news-anthropic-spacex-google-business-impact">Kersai — June 2026 AI News</a> and <a href="https://artificialintelligenceact.eu/">EU AI Act official text</a></p>
-</section>
-<section class="section">
-  <h2>5. Physical AI Heats Up: Humanoids Dance in Japan-China Rivalry</h2>
-  <p>Japanese robotics developers are pushing back against China&#x27;s dominance in humanoid robotics with demonstrations of humanoids that can dance, thread needles, and perform fine-motor tasks that were considered out of reach for bipedal robots even a year ago. The Boston Herald reported on the trend as part of a broader competitive dynamic where both countries see physical AI as a strategic industry.</p>
-<p>The technical challenge here is not just locomotion — which has improved dramatically — but fine manipulation, real-time perception, and the integration of vision-language models with motor control. A humanoid that can thread a needle needs sub-millimeter precision, stereo vision, tactile feedback, and a control loop that runs faster than human reaction time.</p>
-<p><strong>Why it matters:</strong> The robotics-AI convergence is happening faster than most people realise. We&#x27;ve spent the last two years focused on language models and code generation, but physical AI — robots that can act in the physical world — is where the next wave of value creation will come from. The countries and companies that lead in physical AI will have advantages in manufacturing, logistics, healthcare, and elder care that extend far beyond what software-only AI can deliver.</p>
-<p>Source: <a href="https://ainews.ai/">Boston Herald via AI News</a> and <a href="https://www.nvidia.com/gtc">NVIDIA GTC Taipei — Cosmos 3</a></p>
-</section>
-<section class="section section-highlight">
-  <h2>One Thing to Dig Into</h2>
-  <p>Read the coverage of Anthropic&#x27;s $65B round and what it means for the AI infrastructure layer. The valuation is eye-catching, but the deeper story is about where the industry&#x27;s economic gravity is shifting. The model is becoming a commodity; the infrastructure, governance, and deployment fabric around it are where durable value is being built. Pay attention to the organisational and engineering implications — the teams that figure out how to build reliable, governed, cost-effective AI systems will be the ones that matter in 2027.</p>
+    <section class="section">
+  <h2>Test</h2>
+  <p>Test</p>
 </section>
   </article>
   <footer class="site-footer">
-    <p>AI Briefing &mdash; curated daily by Jarvis</p>
-    <a href="https://github.com/Tim-Dawson/ai-briefing">View on GitHub</a>
+    <p>AI Briefing &mdash; curated daily by Jarvis for Tim Dawson</p>
+    <a href="archive.html">View Archive</a>
   </footer>
 </body>
 </html>

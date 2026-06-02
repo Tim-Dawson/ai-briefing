@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archive — AI Briefing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      color-scheme: light dark;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --bg: #f8f9fb;
+      --surface: #ffffff;
+      --text: #1a1e26;
+      --text-secondary: #5b6577;
+      --text-tertiary: #9099a8;
+      --border: #e2e6ed;
+      --accent: #2563eb;
+      --accent-soft: #eef2ff;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --radius: 10px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1117;
+        --surface: #161b22;
+        --text: #e6edf3;
+        --text-secondary: #8b949e;
+        --text-tertiary: #6e7681;
+        --border: #30363d;
+        --accent: #58a6ff;
+        --accent-soft: #0d1b2e;
+      }
+    }
+    html { font-size: 16px; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .site-header {
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .site-header-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .site-title a {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .site-title a:hover { color: var(--accent); }
+    .site-nav a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin-left: 20px;
+      transition: color 0.15s;
+    }
+    .site-nav a:hover { color: var(--accent); }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 24px 64px;
+    }
+    .page-header {
+      margin-bottom: 32px;
+    }
+    .page-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+    .page-header p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+    .archive-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .archive-entry {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .archive-entry:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+    .archive-entry time {
+      flex-shrink: 0;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      min-width: 120px;
+    }
+    .archive-title {
+      flex: 1;
+      font-size: 0.95rem;
+      color: var(--text);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .archive-arrow {
+      flex-shrink: 0;
+      color: var(--text-tertiary);
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+    }
+    .archive-entry:hover .archive-arrow {
+      transform: translateX(4px);
+    }
+    .site-footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 24px 24px 40px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .site-footer p {
+      color: var(--text-tertiary);
+      font-size: 0.825rem;
+    }
+    .site-footer a {
+      color: var(--text-secondary);
+      font-size: 0.825rem;
+      text-decoration: none;
+    }
+    .site-footer a:hover { color: var(--accent); }
+    @media (max-width: 600px) {
+      main { padding: 24px 16px 48px; }
+      .page-header h1 { font-size: 1.5rem; }
+      .archive-entry { padding: 14px 16px; flex-wrap: wrap; gap: 8px; }
+      .archive-entry time { min-width: auto; font-size: 0.8rem; }
+      .archive-title { font-size: 0.875rem; white-space: normal; }
+      .site-header-inner { padding: 14px 16px; }
+      .site-footer { padding: 20px 16px 32px; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="site-title"><a href="/">AI Briefing</a></div>
+      <nav class="site-nav">
+        <a href="latest.html">Latest</a>
+        <a href="archive.html">Archive</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <header class="page-header">
+      <h1>Archive</h1>
+      <p>1 briefing</p>
+    </header>
+    <div class="archive-list"><a href="2026-06-02.html" class="archive-entry">
+            <time datetime="2026-06-02">June 2nd, 2026</time>
+            <span class="archive-title">June 2nd, 2026</span>
+            <span class="archive-arrow">&rarr;</span>
+          </a></div>
+  </main>
+  <footer class="site-footer">
+    <p>AI Briefing &mdash; curated daily by Jarvis for Tim Dawson</p>
+    <a href="https://github.com/Tim-Dawson/ai-briefing">GitHub</a>
+  </footer>
+</body>
+</html>
