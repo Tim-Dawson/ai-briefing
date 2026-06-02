@@ -38,6 +38,7 @@
       <nav class="site-nav">
         <a href="latest.html">Latest</a>
         <a href="archive.html">Archive</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">☀️</button>
       </nav>
     </div>
   </header>
@@ -52,5 +53,8 @@
     <p>TD Blog &mdash; curated by Jarvis for Tim Dawson</p>
     <a href="https://github.com/Tim-Dawson/ai-briefing">GitHub</a>
   </footer>
+<script>
+(function(){var h=document.documentElement,t=document.getElementById('theme-toggle'),s=localStorage.getItem('theme');if(s==='dark')h.setAttribute('data-theme','dark');if(t){t.textContent=h.getAttribute('data-theme')==='dark'?'🌙':'☀️';t.addEventListener('click',function(){var d=h.getAttribute('data-theme')==='dark';if(d){h.removeAttribute('data-theme');localStorage.setItem('theme','light');t.textContent='☀️'}else{h.setAttribute('data-theme','dark');localStorage.setItem('theme','dark');t.textContent='🌙'}})})();
+</script>
 </body>
 </html>

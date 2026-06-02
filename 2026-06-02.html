@@ -11,9 +11,8 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      color-scheme: light dark;
+      
       --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'JetBrains Mono', monospace;
       --bg: #f8f9fb;
       --surface: #ffffff;
       --text: #1a1e26;
@@ -21,35 +20,34 @@
       --text-tertiary: #9099a8;
       --border: #e2e6ed;
       --accent: #2563eb;
-      --accent-hover: #1d4ed8;
       --accent-soft: #eef2ff;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --radius: 10px;
+      --radius-sm: 6px;
+      --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'JetBrains Mono', monospace;
+      --accent-hover: #1d4ed8;
       --accent-border: #bfd4ff;
       --highlight: #fef9e7;
       --highlight-border: #f5d742;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
-      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
       --shadow-lg: 0 4px 16px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
-      --radius: 10px;
-      --radius-sm: 6px;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0d1117;
-        --surface: #161b22;
-        --text: #e6edf3;
-        --text-secondary: #8b949e;
-        --text-tertiary: #6e7681;
-        --border: #30363d;
-        --accent: #58a6ff;
-        --accent-hover: #79c0ff;
-        --accent-soft: #0d1b2e;
-        --accent-border: #1f3a5f;
-        --highlight: #1a1508;
-        --highlight-border: #5c4400;
-        --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
-        --shadow: 0 1px 3px rgba(0,0,0,0.3);
-        --shadow-lg: 0 4px 16px rgba(0,0,0,0.3);
-      }
+    [data-theme="dark"] {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --text: #e6edf3;
+      --text-secondary: #8b949e;
+      --text-tertiary: #6e7681;
+      --border: #30363d;
+      --accent: #58a6ff;
+      --accent-soft: #0d1b2e;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+      --shadow: 0 1px 3px rgba(0,0,0,0.3);
+      --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'JetBrains Mono', monospace;
+      --accent-hover: #79c0ff;
+      --accent-border: #1f3a5f;
+      --highlight: #1a1508;
+      --highlight-border: #5c4400;
+      --shadow-lg: 0 4px 16px rgba(0,0,0,0.3);
     }
     html { font-size: 16px; }
     body {
@@ -259,6 +257,20 @@
       font-size: 0.825rem;
       text-decoration: none;
     }
+    
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 4px 8px;
+      margin-left: 16px;
+      border-radius: var(--radius-sm);
+      transition: background 0.15s;
+      line-height: 1;
+      color: var(--text-secondary);
+    }
+    .theme-toggle:hover { background: var(--accent-soft); }
     .site-footer a:hover { color: var(--accent); }
     @media (max-width: 600px) {
       article { padding: 24px 16px 48px; }
@@ -276,6 +288,7 @@
       <nav class="site-nav">
         <a href="latest.html">Latest</a>
         <a href="archive.html">Archive</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">☀️</button>
       </nav>
     </div>
   </header>
@@ -337,5 +350,8 @@
     <p>TD Blog &mdash; curated by Jarvis for Tim Dawson</p>
     <a href="archive.html">View Archive</a>
   </footer>
+<script>
+(function(){var h=document.documentElement,t=document.getElementById('theme-toggle'),s=localStorage.getItem('theme');if(s==='dark')h.setAttribute('data-theme','dark');if(t){t.textContent=h.getAttribute('data-theme')==='dark'?'🌙':'☀️';t.addEventListener('click',function(){var d=h.getAttribute('data-theme')==='dark';if(d){h.removeAttribute('data-theme');localStorage.setItem('theme','light');t.textContent='☀️'}else{h.setAttribute('data-theme','dark');localStorage.setItem('theme','dark');t.textContent='🌙'}})})();
+</script>
 </body>
 </html>
