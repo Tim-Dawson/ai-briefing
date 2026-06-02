@@ -6,15 +6,137 @@
   <title>AI Daily Briefing</title>
   <meta http-equiv="refresh" content="0;url=latest.html">
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #f6f7f9; color: #1d2430; }
-    p { font-size: 1.1rem; }
-    a { color: #2457c5; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'JetBrains Mono', monospace;
+      --bg: #f8f9fb;
+      --surface: #ffffff;
+      --text: #1a1e26;
+      --text-secondary: #5b6577;
+      --text-tertiary: #9099a8;
+      --border: #e2e6ed;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-soft: #eef2ff;
+      --accent-border: #bfd4ff;
+      --highlight: #fef9e7;
+      --highlight-border: #f5d742;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-lg: 0 4px 16px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
+      --radius: 10px;
+      --radius-sm: 6px;
+    }
+    [data-theme="dark"] {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --text: #e6edf3;
+      --text-secondary: #8b949e;
+      --text-tertiary: #6e7681;
+      --border: #30363d;
+      --accent: #58a6ff;
+      --accent-hover: #79c0ff;
+      --accent-soft: #0d1b2e;
+      --accent-border: #1f3a5f;
+      --highlight: #1a1508;
+      --highlight-border: #5c4400;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+      --shadow: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-lg: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    html { font-size: 16px; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .site-header { border-bottom: 1px solid var(--border); background: var(--surface); }
+    .site-header-inner { max-width: 720px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+    .site-title a { font-size: 1.15rem; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+    .site-title a:hover { color: var(--accent); }
+    .site-nav { display: flex; align-items: center; gap: 8px; }
+    .site-nav a { font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: color 0.15s; }
+    .site-nav a:hover { color: var(--accent); }
+    .theme-toggle {
+      background: none; border: 1px solid var(--border); cursor: pointer;
+      font-size: 0.75rem; font-weight: 600;
+      padding: 4px 10px; margin-left: 12px;
+      border-radius: var(--radius-sm);
+      transition: background 0.15s, border-color 0.15s;
+      line-height: 1;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .theme-toggle:hover { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+    article { max-width: 720px; margin: 0 auto; padding: 40px 24px 64px; }
+    .article-header { margin-bottom: 40px; }
+    .article-header .eyebrow { display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .article-header h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .article-meta { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; color: var(--text-secondary); font-size: 0.875rem; }
+    .article-meta time { font-weight: 500; }
+    .reading-time { color: var(--text-tertiary); }
+    .reading-time::before { content: '·'; margin-right: 16px; color: var(--text-tertiary); }
+    .section { margin-bottom: 28px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); transition: box-shadow 0.2s; }
+    .section:hover { box-shadow: var(--shadow-lg); }
+    .section h2 { font-size: 1.2rem; font-weight: 700; line-height: 1.3; margin-bottom: 12px; letter-spacing: -0.01em; }
+    .section p { margin-bottom: 14px; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.75; }
+    .section p:last-child { margin-bottom: 0; }
+    .section ul { margin: 8px 0 0; padding-left: 1.25rem; }
+    .section li { margin: 6px 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.65; }
+    .section a { color: var(--accent); text-decoration: none; font-weight: 500; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+    .section a:hover { border-bottom-color: var(--accent); }
+    .section strong { font-weight: 600; color: var(--text); }
+    .section code { font-family: var(--font-mono); font-size: 0.875em; padding: 2px 6px; background: var(--accent-soft); border-radius: var(--radius-sm); }
+    .section-highlight { border-left: 4px solid var(--highlight-border); background: var(--highlight); }
+    .section-highlight h2 { color: var(--text); }
+    .tag { display: inline-block; font-size: 0.75rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); margin-right: 6px; margin-bottom: 6px; letter-spacing: 0.01em; }
+    .at-a-glance { margin-bottom: 28px; padding: 20px 24px; background: var(--accent-soft); border: 1px solid var(--accent-border); border-radius: var(--radius); }
+    .at-a-glance h2 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .at-a-glance ul { list-style: none; padding: 0; }
+    .at-a-glance li { position: relative; padding-left: 20px; margin: 8px 0; font-size: 0.9rem; line-height: 1.6; color: var(--text); }
+    .at-a-glance li::before { content: ''; position: absolute; left: 4px; top: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: 0.5; }
+    .site-footer { max-width: 720px; margin: 0 auto; padding: 24px 24px 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .site-footer p { color: var(--text-tertiary); font-size: 0.825rem; }
+    .site-footer a { color: var(--text-secondary); font-size: 0.825rem; text-decoration: none; }
+    .site-footer a:hover { color: var(--accent); }
+    @media (max-width: 600px) {
+      article { padding: 24px 16px 48px; }
+      .article-header h1 { font-size: 1.75rem; }
+      .section { padding: 18px; }
+      .site-header-inner { padding: 14px 16px; }
+      .site-footer { padding: 20px 16px 32px; flex-direction: column; text-align: center; }
+    }
   </style>
 </head>
 <body>
   <p>Loading latest briefing&hellip; <a href="latest.html">click here</a></p>
 <script>
-(function(){var h=document.documentElement,t=document.getElementById('theme-toggle'),s=localStorage.getItem('theme');if(s==='dark')h.setAttribute('data-theme','dark');if(t){t.textContent=h.getAttribute('data-theme')==='dark'?'🌙':'☀️';t.addEventListener('click',function(){var d=h.getAttribute('data-theme')==='dark';if(d){h.removeAttribute('data-theme');localStorage.setItem('theme','light');t.textContent='☀️'}else{h.setAttribute('data-theme','dark');localStorage.setItem('theme','dark');t.textContent='🌙'}})})();
+(function(){
+  var h=document.documentElement,
+      t=document.getElementById('theme-toggle'),
+      s=localStorage.getItem('theme');
+  if(s==='dark') h.setAttribute('data-theme','dark');
+  if(t) {
+    t.textContent = h.getAttribute('data-theme')==='dark' ? 'LIGHT' : 'DARK';
+    t.addEventListener('click',function(){
+      var isDark = h.getAttribute('data-theme')==='dark';
+      if(isDark) {
+        h.removeAttribute('data-theme');
+        localStorage.setItem('theme','light');
+        t.textContent = 'DARK';
+      } else {
+        h.setAttribute('data-theme','dark');
+        localStorage.setItem('theme','dark');
+        t.textContent = 'LIGHT';
+      }
+    });
+  }
+})();
 </script>
 </body>
 </html>

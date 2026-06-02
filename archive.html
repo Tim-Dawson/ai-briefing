@@ -9,26 +9,77 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Inter, system-ui, -apple-system, sans-serif; background: #0f1117; color: #e1e4eb; line-height: 1.7; min-height: 100vh; }
-    .site-header { border-bottom: 1px solid #262a33; }
+    :root {
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --bg: #f8f9fb;
+      --surface: #ffffff;
+      --text: #1a1e26;
+      --text-secondary: #5b6577;
+      --text-tertiary: #9099a8;
+      --border: #e2e6ed;
+      --accent: #2563eb;
+      --accent-soft: #eef2ff;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-lg: 0 4px 16px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
+      --radius: 10px;
+      --radius-sm: 6px;
+    }
+    [data-theme="dark"] {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --text: #e6edf3;
+      --text-secondary: #8b949e;
+      --text-tertiary: #6e7681;
+      --border: #30363d;
+      --accent: #58a6ff;
+      --accent-soft: #0d1b2e;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+      --shadow: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-lg: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    html { font-size: 16px; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    .site-header { border-bottom: 1px solid var(--border); background: var(--surface); }
     .site-header-inner { max-width: 800px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
     .site-title { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; }
-    .site-title a { color: #e1e4eb; text-decoration: none; }
-    .site-title a:hover { color: #fff; }
-    .site-nav a { color: #8b8fa3; text-decoration: none; font-size: 0.9rem; margin-left: 1.5rem; font-weight: 500; }
-    .site-nav a:hover { color: #e1e4eb; }
+    .site-title a { color: var(--text); text-decoration: none; }
+    .site-title a:hover { color: var(--accent); }
+    .site-nav { display: flex; align-items: center; gap: 8px; }
+    .site-nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+    .site-nav a:hover { color: var(--accent); }
+    .theme-toggle {
+      background: none; border: 1px solid var(--border); cursor: pointer;
+      font-size: 0.75rem; font-weight: 600;
+      padding: 4px 10px; margin-left: 12px;
+      border-radius: var(--radius-sm);
+      transition: background 0.15s, border-color 0.15s;
+      line-height: 1;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .theme-toggle:hover { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
     main { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
     .page-header { margin-bottom: 2rem; }
-    .page-header h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; color: #fff; }
-    .page-header p { color: #8b8fa3; margin-top: 0.3rem; }
+    .page-header h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text); }
+    .page-header p { color: var(--text-secondary); margin-top: 0.3rem; }
     .archive-list { display: flex; flex-direction: column; gap: 0.5rem; }
-    .archive-entry { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; background: #161a22; border: 1px solid #1f2430; border-radius: 10px; text-decoration: none; transition: background 0.15s, border-color 0.15s; }
-    .archive-entry:hover { background: #1c202b; border-color: #2f3544; }
-    .archive-title { font-size: 1rem; font-weight: 600; color: #e1e4eb; }
-    .archive-arrow { color: #8b8fa3; font-size: 1.1rem; }
-    .site-footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid #262a33; color: #5a5f72; font-size: 0.85rem; }
-    .site-footer a { color: #8b8fa3; text-decoration: none; }
-    .site-footer a:hover { color: #e1e4eb; }
+    .archive-entry { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; transition: background 0.15s, border-color 0.15s; }
+    .archive-entry:hover { background: var(--accent-soft); border-color: var(--accent); }
+    .archive-title { font-size: 1rem; font-weight: 600; color: var(--text); }
+    .archive-arrow { color: var(--text-tertiary); font-size: 1.1rem; }
+    .site-footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid var(--border); color: var(--text-tertiary); font-size: 0.85rem; }
+    .site-footer a { color: var(--text-secondary); text-decoration: none; }
+    .site-footer a:hover { color: var(--accent); }
+    @media (max-width: 600px) {
+      main { padding: 24px 16px 48px; }
+      .page-header h1 { font-size: 1.5rem; }
+      .archive-entry { padding: 14px 16px; }
+      .archive-title { font-size: 0.9rem; }
+      .site-header-inner { padding: 14px 16px; }
+      .site-footer { padding: 20px 16px 32px; flex-direction: column; text-align: center; }
+    }
   </style>
 </head>
 <body>
@@ -38,7 +89,7 @@
       <nav class="site-nav">
         <a href="latest.html">Latest</a>
         <a href="archive.html">Archive</a>
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">☀️</button>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">DARK</button>
       </nav>
     </div>
   </header>
@@ -54,7 +105,27 @@
     <a href="https://github.com/Tim-Dawson/ai-briefing">GitHub</a>
   </footer>
 <script>
-(function(){var h=document.documentElement,t=document.getElementById('theme-toggle'),s=localStorage.getItem('theme');if(s==='dark')h.setAttribute('data-theme','dark');if(t){t.textContent=h.getAttribute('data-theme')==='dark'?'🌙':'☀️';t.addEventListener('click',function(){var d=h.getAttribute('data-theme')==='dark';if(d){h.removeAttribute('data-theme');localStorage.setItem('theme','light');t.textContent='☀️'}else{h.setAttribute('data-theme','dark');localStorage.setItem('theme','dark');t.textContent='🌙'}})})();
+(function(){
+  var h=document.documentElement,
+      t=document.getElementById('theme-toggle'),
+      s=localStorage.getItem('theme');
+  if(s==='dark') h.setAttribute('data-theme','dark');
+  if(t) {
+    t.textContent = h.getAttribute('data-theme')==='dark' ? 'LIGHT' : 'DARK';
+    t.addEventListener('click',function(){
+      var isDark = h.getAttribute('data-theme')==='dark';
+      if(isDark) {
+        h.removeAttribute('data-theme');
+        localStorage.setItem('theme','light');
+        t.textContent = 'DARK';
+      } else {
+        h.setAttribute('data-theme','dark');
+        localStorage.setItem('theme','dark');
+        t.textContent = 'LIGHT';
+      }
+    });
+  }
+})();
 </script>
 </body>
 </html>
